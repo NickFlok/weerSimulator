@@ -111,7 +111,7 @@ public class Reader {
 
 	     };
 
-	       saxParser.parse("c:\\output.xml", handler);
+	       saxParser.parse("file.xml", handler);
 	 
 	     } catch (Exception e) {
 	       e.printStackTrace();
