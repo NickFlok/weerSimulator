@@ -22,12 +22,13 @@ public static void main(String[] args) {
 		if (waarde == null) {
 			for(int i:dertigw ) {
 				
+				
 			
 		}
 		
 	}
 	
-	 public boolean checkFout(waarde) {
+	 public boolean checkFout(waarde) 
 		
 		 
 		 
