@@ -9,6 +9,9 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 
 public class ServerTest {
     public static void main(String[] args) {
@@ -42,15 +45,45 @@ public class ServerTest {
     private static class ClientHandler implements Runnable {
 
         private final Socket clientSocket;
+    	private String date;
+    	private ArrayList stationListNic;
+    	private ArrayList stationListBol;
+    	private ArrayList stationListSur;
 
         public ClientHandler(Socket socket) {
+        	
             this.clientSocket = socket;
+            Date currentDate = new Date();
+            this.date = new SimpleDateFormat("yyyy-MM-dd").format(currentDate);
+            stationListNic = new ArrayList();
+            stationListBol = new ArrayList();
+            stationListSur = new ArrayList();
+            
+        }
+        
+        public String split(String s){
+        	
+            int beginString = -1;
+            int endString = -1;
+            beginString = s.indexOf(">") + 1;
+            endString = s.indexOf("</");
+            s = s.substring(beginString,endString);
+            return s;
+            
         }
 
         @Override
         public void run() {
             PrintWriter out = null;
             BufferedReader in = null;
+            String station = "";
+            String date = "";
+            String time = "";
+            String windSpeed = "";
+            String cloudCoverage = "";
+            stationListNic.add("298690");
+            stationListBol.add("947260");
+            stationListSur.add("749538");
       
             try {
                 out = new PrintWriter("file.csv");
@@ -58,8 +91,49 @@ public class ServerTest {
                 
                 String line;
                 while ((line = in.readLine()) != null) {
-                    System.out.printf("Sent from the client: %s\n", line);
-                    out.println(line);
+                    if(line.contains("<STN>")) {
+                    	station = split(line);
+                    }
+                    if(line.contains("<DATE>")) {
+                    	date = split(line);
+                    }
+                    if(line.contains("<TIME>")) {
+                    	time = split(line);
+                    }
+                    if(line.contains("<WDSP>")) {
+                    	windSpeed = split(line);
+                    }
+                    if(line.contains("<CLDC>")) {
+                    	cloudCoverage = split(line);
+                    }
+                    if(stationListNic.contains(station)) {
+                    	
+                        System.out.println(station);
+                        System.out.println(date);
+                        System.out.println(time);
+                        System.out.println(windSpeed);
+                        System.out.println(cloudCoverage);
+                    	
+                    }
+                    if(stationListBol.contains(station)) {
+                    	
+                        System.out.println(station);
+                        System.out.println(date);
+                        System.out.println(time);
+                        System.out.println(windSpeed);
+                        System.out.println(cloudCoverage);
+                    	
+                    }
+                    if(stationListSur.contains(station)) {
+                    	
+                        System.out.println(station);
+                        System.out.println(date);
+                        System.out.println(time);
+                        System.out.println(windSpeed);
+                        System.out.println(cloudCoverage);
+                    	
+                    }
+
                     out.write(line);
                 }
             } catch (IOException e) {
