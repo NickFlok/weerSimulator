@@ -1,8 +1,10 @@
+package weerSimulator;
+
 
 import java.util.LinkedList;
 import java.util.Queue;
 
-public class Main {
+public class ErrorCorrection {
 	
 	
 	
@@ -29,7 +31,6 @@ public class Main {
 		int c = 0;
 	
 		for (int i=0; i < q.size(); i++) {
-			int test = q.size();
 			String element = q.remove();
 			float fElement = Float.parseFloat(element);
 			a[c] = fElement;
