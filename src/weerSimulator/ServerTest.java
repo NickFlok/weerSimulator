@@ -82,7 +82,6 @@ public class ServerTest {
         public void adder() {
         	windSpeedCheck.add(windSpeed);
         }
-        
 
         @Override
         public synchronized void run() {
@@ -91,6 +90,7 @@ public class ServerTest {
             String station = " ";
             String date = " ";
             String time = " ";
+            String windSpeed = " ";
             String cloudCoverage = " ";
             String day = " ";
             stationListNic.add("298690");
@@ -127,13 +127,13 @@ public class ServerTest {
                         System.out.println(cloudCoverage);
                         out.write("N");
                         out.write(station);
-                        out.write(" ");
+                        out.write("D");
                         out.write(date);
-                        out.write(" ");
+                        out.write("T");
                         out.write(time);
-                        out.write(" ");
+                        out.write("W");
                         out.write(windSpeed);
-                        out.write(" ");
+                        out.write("C");
                         out.write(cloudCoverage);
 
                     }
@@ -144,16 +144,17 @@ public class ServerTest {
                         System.out.println(time);
                         System.out.println(windSpeed);
                         System.out.println(cloudCoverage);
-                        out.write("B");
+                        out.write("N");
                         out.write(station);
-                        out.write(" ");
+                        out.write("D");
                         out.write(date);
-                        out.write(" ");
+                        out.write("T");
                         out.write(time);
-                        out.write(" ");
+                        out.write("W");
                         out.write(windSpeed);
-                        out.write(" ");
+                        out.write("C");
                         out.write(cloudCoverage);
+
                         
                     }
                     if(stationListSur.contains(station)) {
@@ -163,17 +164,17 @@ public class ServerTest {
                         System.out.println(time);
                         System.out.println(windSpeed);
                         System.out.println(cloudCoverage);
-                        adder();
-                        out.write("S");
+                        out.write("N");
                         out.write(station);
-                        out.write(" ");
+                        out.write("D");
                         out.write(date);
-                        out.write(" ");
+                        out.write("T");
                         out.write(time);
-                        out.write(" ");
+                        out.write("W");
                         out.write(windSpeed);
-                        out.write(" ");
-                        out.write(cloudCoverage);                      
+                        out.write("C");
+                        out.write(cloudCoverage);
+                     
 
                     }
 
