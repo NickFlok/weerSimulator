@@ -53,6 +53,7 @@ public class ServerTest {
     	private ArrayList stationListSur;
     	private LinkedList windSpeedCheck;
     	private LinkedList cloudCoverageCheck;
+    	private String windSpeed;
 
         public ClientHandler(Socket socket) {
         	
@@ -78,16 +79,20 @@ public class ServerTest {
             
         }
         
+        public void adder() {
+        	windSpeedCheck.add(windSpeed);
+        }
+        
 
         @Override
         public synchronized void run() {
             PrintWriter out = null;
             BufferedReader in = null;
-            String station = "";
-            String date = "";
-            String time = "";
-            String windSpeed = "";
-            String cloudCoverage = "";
+            String station = " ";
+            String date = " ";
+            String time = " ";
+            String cloudCoverage = " ";
+            String day = " ";
             stationListNic.add("298690");
             stationListBol.add("947260");
             stationListSur.add("749538");
@@ -120,7 +125,7 @@ public class ServerTest {
                         System.out.println(time);
                         System.out.println(windSpeed);
                         System.out.println(cloudCoverage);
-                        out.write("#");
+                        out.write("N");
                         out.write(station);
                         out.write(" ");
                         out.write(date);
@@ -130,9 +135,7 @@ public class ServerTest {
                         out.write(windSpeed);
                         out.write(" ");
                         out.write(cloudCoverage);
-                        this.windSpeedCheck.add(windSpeed);
-                        this.cloudCoverageCheck.add(cloudCoverage);
-                    	
+
                     }
                     if(stationListBol.contains(station)) {
                     	
@@ -141,7 +144,7 @@ public class ServerTest {
                         System.out.println(time);
                         System.out.println(windSpeed);
                         System.out.println(cloudCoverage);
-                        out.write("#");
+                        out.write("B");
                         out.write(station);
                         out.write(" ");
                         out.write(date);
@@ -151,8 +154,6 @@ public class ServerTest {
                         out.write(windSpeed);
                         out.write(" ");
                         out.write(cloudCoverage);
-                        this.windSpeedCheck.add(windSpeed);
-                        this.cloudCoverageCheck.add(cloudCoverage);
                         
                     }
                     if(stationListSur.contains(station)) {
@@ -162,7 +163,8 @@ public class ServerTest {
                         System.out.println(time);
                         System.out.println(windSpeed);
                         System.out.println(cloudCoverage);
-                        out.write("#");
+                        adder();
+                        out.write("S");
                         out.write(station);
                         out.write(" ");
                         out.write(date);
@@ -171,10 +173,8 @@ public class ServerTest {
                         out.write(" ");
                         out.write(windSpeed);
                         out.write(" ");
-                        out.write(cloudCoverage);
-                        this.windSpeedCheck.add(windSpeed);
-                        this.cloudCoverageCheck.add(cloudCoverage);
-                    	
+                        out.write(cloudCoverage);                      
+
                     }
 
                 }
