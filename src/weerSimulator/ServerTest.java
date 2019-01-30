@@ -12,6 +12,8 @@ import java.net.Socket;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class ServerTest {
     public static void main(String[] args) {
@@ -49,6 +51,8 @@ public class ServerTest {
     	private ArrayList stationListNic;
     	private ArrayList stationListBol;
     	private ArrayList stationListSur;
+    	private LinkedList windSpeedCheck;
+    	private LinkedList cloudCoverageCheck;
 
         public ClientHandler(Socket socket) {
         	
@@ -58,6 +62,8 @@ public class ServerTest {
             stationListNic = new ArrayList();
             stationListBol = new ArrayList();
             stationListSur = new ArrayList();
+            Queue windSpeedCheck = new LinkedList();
+            Queue cloudCoverageCheck = new LinkedList();
             
         }
         
@@ -71,9 +77,10 @@ public class ServerTest {
             return s;
             
         }
+        
 
         @Override
-        public void run() {
+        public synchronized void run() {
             PrintWriter out = null;
             BufferedReader in = null;
             String station = "";
@@ -113,6 +120,18 @@ public class ServerTest {
                         System.out.println(time);
                         System.out.println(windSpeed);
                         System.out.println(cloudCoverage);
+                        out.write("#");
+                        out.write(station);
+                        out.write(" ");
+                        out.write(date);
+                        out.write(" ");
+                        out.write(time);
+                        out.write(" ");
+                        out.write(windSpeed);
+                        out.write(" ");
+                        out.write(cloudCoverage);
+                        this.windSpeedCheck.add(windSpeed);
+                        this.cloudCoverageCheck.add(cloudCoverage);
                     	
                     }
                     if(stationListBol.contains(station)) {
@@ -122,7 +141,19 @@ public class ServerTest {
                         System.out.println(time);
                         System.out.println(windSpeed);
                         System.out.println(cloudCoverage);
-                    	
+                        out.write("#");
+                        out.write(station);
+                        out.write(" ");
+                        out.write(date);
+                        out.write(" ");
+                        out.write(time);
+                        out.write(" ");
+                        out.write(windSpeed);
+                        out.write(" ");
+                        out.write(cloudCoverage);
+                        this.windSpeedCheck.add(windSpeed);
+                        this.cloudCoverageCheck.add(cloudCoverage);
+                        
                     }
                     if(stationListSur.contains(station)) {
                     	
@@ -131,10 +162,21 @@ public class ServerTest {
                         System.out.println(time);
                         System.out.println(windSpeed);
                         System.out.println(cloudCoverage);
+                        out.write("#");
+                        out.write(station);
+                        out.write(" ");
+                        out.write(date);
+                        out.write(" ");
+                        out.write(time);
+                        out.write(" ");
+                        out.write(windSpeed);
+                        out.write(" ");
+                        out.write(cloudCoverage);
+                        this.windSpeedCheck.add(windSpeed);
+                        this.cloudCoverageCheck.add(cloudCoverage);
                     	
                     }
 
-                    out.write(line);
                 }
             } catch (IOException e) {
                 e.printStackTrace();
