@@ -54,6 +54,7 @@ public class ServerTest {
     	private LinkedList windSpeedCheck;
     	private LinkedList cloudCoverageCheck;
     	private String windSpeed;
+    	private String cloudCoverage;
 
         public ClientHandler(Socket socket) {
         	
@@ -63,8 +64,8 @@ public class ServerTest {
             stationListNic = new ArrayList();
             stationListBol = new ArrayList();
             stationListSur = new ArrayList();
-            Queue windSpeedCheck = new LinkedList();
-            Queue cloudCoverageCheck = new LinkedList();
+            Queue<String> windSpeedCheck = new LinkedList<String>();
+            Queue<String> cloudCoverageCheck = new LinkedList<String>();
             
         }
         
@@ -81,6 +82,7 @@ public class ServerTest {
         
         public void adder() {
         	windSpeedCheck.add(windSpeed);
+        	cloudCoverageCheck.add(cloudCoverage);
         }
 
         @Override
@@ -125,6 +127,7 @@ public class ServerTest {
                         System.out.println(time);
                         System.out.println(windSpeed);
                         System.out.println(cloudCoverage);
+                        adder();
                         out.write("N");
                         out.write(station);
                         out.write("D");
@@ -144,6 +147,7 @@ public class ServerTest {
                         System.out.println(time);
                         System.out.println(windSpeed);
                         System.out.println(cloudCoverage);
+                        adder();
                         out.write("N");
                         out.write(station);
                         out.write("D");
@@ -164,6 +168,7 @@ public class ServerTest {
                         System.out.println(time);
                         System.out.println(windSpeed);
                         System.out.println(cloudCoverage);
+                        adder();
                         out.write("N");
                         out.write(station);
                         out.write("D");
