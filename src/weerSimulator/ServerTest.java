@@ -15,6 +15,9 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import sun.invoke.empty.Empty;
+import weerSimulator.ErrorCorrection;
+
 public class ServerTest {
     public static void main(String[] args) {
 
@@ -66,6 +69,8 @@ public class ServerTest {
             stationListSur = new ArrayList();
             Queue<String> windSpeedCheck = new LinkedList<String>();
             Queue<String> cloudCoverageCheck = new LinkedList<String>();
+            windSpeedCheck.add("1");
+            cloudCoverageCheck.add("1");
             
         }
         
@@ -80,10 +85,41 @@ public class ServerTest {
             
         }
         
-        public void adder() {
-        	windSpeedCheck.add(windSpeed);
-        	cloudCoverageCheck.add(cloudCoverage);
+      /*  public String addWind(String windSpeed) {
+        	if(windSpeed != null) {
+        		windSpeedCheck.add(windSpeed);
+        		windSpeed = ErrorCorrection.errorCheck(windSpeedCheck, windSpeed);
+        		return windSpeed;
+        	}
+        	
+        	float[] windspeedF = ErrorCorrection.naarArray(windSpeedCheck);
+        	float som = ErrorCorrection.calcSom(windspeedF);
+        	float gemiddelde = ErrorCorrection.gemiddelde(som, windSpeedCheck);
+        	windSpeed = Float.toString(gemiddelde);
+        	if (windSpeedCheck.size() >=30) {
+        			windSpeedCheck.remove();
+				}
+        	return windSpeed;   	
         }
+        
+        
+        public String addCoverage(String cloudCoverage) {
+        	if (cloudCoverage != null) {
+        		cloudCoverageCheck.add(cloudCoverage);
+        		cloudCoverage = ErrorCorrection.errorCheck(cloudCoverageCheck, cloudCoverage);
+        		return cloudCoverage;
+        	}
+        	
+        	float[] cloudF = ErrorCorrection.naarArray(cloudCoverageCheck);
+        	float som = ErrorCorrection.calcSom(cloudF);
+        	float gemiddelde = ErrorCorrection.gemiddelde(som, cloudCoverageCheck);
+        	cloudCoverage = Float.toString(gemiddelde);
+        	if (cloudCoverageCheck.size() >=30) {
+        			cloudCoverageCheck.remove();
+			}
+        	return cloudCoverage;
+       }*/
+        
 
         @Override
         public synchronized void run() {
@@ -122,12 +158,15 @@ public class ServerTest {
                     }
                     if(stationListNic.contains(station)) {
                     	
-                        System.out.println(station);
+                    	// doet errorhandeling
+                        //windSpeed = addWind(windSpeed);
+                       // cloudCoverage = addCoverage(cloudCoverage);
+                    	
+                    	System.out.println(station);
                         System.out.println(date);
                         System.out.println(time);
                         System.out.println(windSpeed);
                         System.out.println(cloudCoverage);
-                        adder();
                         out.write("N");
                         out.write(station);
                         out.write("D");
@@ -142,12 +181,15 @@ public class ServerTest {
                     }
                     if(stationListBol.contains(station)) {
                     	
+                    	// doet errorhandeling
+                      //  windSpeed = addWind(windSpeed);
+                       // cloudCoverage = addCoverage(cloudCoverage);
+                    	
                         System.out.println(station);
                         System.out.println(date);
                         System.out.println(time);
                         System.out.println(windSpeed);
                         System.out.println(cloudCoverage);
-                        adder();
                         out.write("N");
                         out.write(station);
                         out.write("D");
@@ -163,12 +205,27 @@ public class ServerTest {
                     }
                     if(stationListSur.contains(station)) {
                     	
+//                    	// doet errorhandeling
+//                    	if(windSpeed != null && !windSpeed.isEmpty()){
+//                    		windSpeedCheck.add(windSpeed);
+//                    		windSpeed = ErrorCorrection.errorCheck(windSpeedCheck, windSpeed);	
+//                    	}
+//                    	float[] windspeedF = ErrorCorrection.naarArray(windSpeedCheck);
+//                    	float som = ErrorCorrection.calcSom(windspeedF);
+//                    	float gemiddelde = ErrorCorrection.gemiddelde(som, windSpeedCheck);
+//                    	windSpeed = Float.toString(gemiddelde);
+//                    	if (windSpeedCheck.size() >=30) {
+//                    			windSpeedCheck.remove();
+//            				}
+//                     	
+                        
+                        //cloudCoverage = addCoverage(cloudCoverage);
+                    	
                         System.out.println(station);
                         System.out.println(date);
                         System.out.println(time);
                         System.out.println(windSpeed);
                         System.out.println(cloudCoverage);
-                        adder();
                         out.write("N");
                         out.write(station);
                         out.write("D");

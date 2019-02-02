@@ -7,7 +7,7 @@ import java.util.Queue;
 public class ErrorCorrection {
 	
 	
-	
+	// testing purpose
 	public static void main(String argv[]) {
 		
 		Queue<String> q = new LinkedList<String>();
@@ -26,27 +26,13 @@ public class ErrorCorrection {
 	
 	
 	public static String errorCheck(Queue<String> q, String waarde) {
+	
+		float[] a = naarArray(q);
 		
-		float[] a = new float[30];
-		int c = 0;
-	
-		for (int i=0; i < q.size(); i++) {
-			String element = q.remove();
-			float fElement = Float.parseFloat(element);
-			a[c] = fElement;
-			c ++;
-			q.add(element);
-		}	
-	
 		float som = calcSom(a);
 		float gemiddelde = gemiddelde(som, q);
 		String sGemiddelde = Float.toString(gemiddelde);
-		
-		boolean miss = checkMiss(waarde);
-		if(miss == true) {
-			return sGemiddelde;
-		}
-		
+	
 		float fWaarde = Float.parseFloat(waarde);
 		boolean fout = checkFout(gemiddelde, fWaarde);
 		if (fout == true) {
@@ -60,6 +46,21 @@ public class ErrorCorrection {
 		return waarde;		
 	}
 	
+	// parsed het naar een array of floats
+	public static float[] naarArray(Queue<String> q) {
+		float[] a = new float[30];
+		int c = 0;
+	
+		for (int i=0; i < q.size(); i++) {
+			String element = q.remove();
+			float fElement = Float.parseFloat(element);
+			a[c] = fElement;
+			c ++;
+			q.add(element);
+		}	
+		return a;
+		
+	}
 	// checked als er wel een waarde is
 	 public static boolean checkMiss(String waarde) {
 		 
