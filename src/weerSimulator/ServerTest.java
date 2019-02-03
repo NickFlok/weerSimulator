@@ -1,9 +1,6 @@
-package weather;
+package weerSimulator;
 
-
-import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
@@ -12,18 +9,14 @@ import java.net.Socket;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.LinkedList;
-import java.util.Queue;
-
-import sun.invoke.empty.Empty;
-import weerSimulator.ErrorCorrection;
 
 public class ServerTest {
     public static void main(String[] args) {
 
-        ServerSocket server = null;
+    	System.out.println("Running");
+    	ServerSocket server = null;
         try {
-            server = new ServerSocket(7789);
+            server = new ServerSocket(9999);
             server.setReuseAddress(true);
             // The main thread is just accepting new connections
             while (true) {
@@ -50,27 +43,26 @@ public class ServerTest {
     private static class ClientHandler implements Runnable {
 
         private final Socket clientSocket;
-    	private String date;
-    	private ArrayList stationListNic;
-    	private ArrayList stationListBol;
-    	private ArrayList stationListSur;
-    	private LinkedList windSpeedCheck;
-    	private LinkedList cloudCoverageCheck;
+    	private ArrayList<String> stationListNic;
+    	private ArrayList<String> stationListBol;
+    	private ArrayList<String> stationListSur;
+    	/*private LinkedList<?> windSpeedCheck;
+    	private LinkedList<?> cloudCoverageCheck;
     	private String windSpeed;
-    	private String cloudCoverage;
+    	private String cloudCoverage;*/
 
         public ClientHandler(Socket socket) {
         	
             this.clientSocket = socket;
             Date currentDate = new Date();
-            this.date = new SimpleDateFormat("yyyy-MM-dd").format(currentDate);
-            stationListNic = new ArrayList();
-            stationListBol = new ArrayList();
-            stationListSur = new ArrayList();
-            Queue<String> windSpeedCheck = new LinkedList<String>();
-            Queue<String> cloudCoverageCheck = new LinkedList<String>();
-            windSpeedCheck.add("1");
-            cloudCoverageCheck.add("1");
+            new SimpleDateFormat("yyyy-MM-dd").format(currentDate);
+            stationListNic = new ArrayList<String>();
+            stationListBol = new ArrayList<String>();
+            stationListSur = new ArrayList<String>();
+//            Queue<String> windSpeedCheck = new LinkedList<String>();
+//            Queue<String> cloudCoverageCheck = new LinkedList<String>();
+//            windSpeedCheck.add("1");
+//            cloudCoverageCheck.add("1");
             
         }
         
@@ -130,13 +122,13 @@ public class ServerTest {
             String time = " ";
             String windSpeed = " ";
             String cloudCoverage = " ";
-            String day = " ";
+            //String day = " ";
             stationListNic.add("298690");
             stationListBol.add("947260");
             stationListSur.add("749538");
       
             try {
-                out = new PrintWriter("file.xml");
+                out = new PrintWriter("/home/pi/data/weather.xml");
                 in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                 
                 String line;
