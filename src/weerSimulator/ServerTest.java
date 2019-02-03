@@ -136,7 +136,7 @@ public class ServerTest {
             stationListSur.add("749538");
       
             try {
-                out = new PrintWriter("file1.csv");
+                out = new PrintWriter("/home/ITV2E01/backup/file1.csv");
                 in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                 
                 String line;
