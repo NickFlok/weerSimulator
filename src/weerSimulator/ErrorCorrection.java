@@ -1,6 +1,7 @@
 package weerSimulator;
 
 
+import java.text.DecimalFormat;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -31,11 +32,23 @@ public class ErrorCorrection {
 		
 		float som = calcSom(a);
 		float gemiddelde = gemiddelde(som, q);
-		String sGemiddelde = Float.toString(gemiddelde);
-	
+		String sGemiddelde = format(gemiddelde);
+		sGemiddelde = sGemiddelde.replace(".", ",");
+		boolean empty = checkEmpty(waarde);
+		
+		if(empty == true) {
+			if (q.size() >= 30) {
+				q.remove();
+			}
+			return sGemiddelde;
+		}
+
 		float fWaarde = Float.parseFloat(waarde);
 		boolean fout = checkFout(gemiddelde, fWaarde);
 		if (fout == true) {
+			if (q.size() >= 30) {
+				q.remove();
+			}
 				return sGemiddelde;
 			}				
 		
@@ -45,6 +58,16 @@ public class ErrorCorrection {
 		
 		return waarde;		
 	}
+	
+	
+	// Kijkt als de waarde leeg is
+	public static boolean checkEmpty(String waarde) {
+		if (waarde.isEmpty()) {
+			return true;
+		}
+		return false;
+	}
+	
 	
 	// parsed het naar een array of floats
 	public static float[] naarArray(Queue<String> q) {
@@ -61,6 +84,14 @@ public class ErrorCorrection {
 		return a;
 		
 	}
+	
+	//format de float naar 1 decimaal
+		public static String format(float waarde) {
+			DecimalFormat df = new DecimalFormat("#.#");
+			String s = df.format(waarde);
+			return s;
+		}
+	
 	// checked als er wel een waarde is
 	 public static boolean checkMiss(String waarde) {
 		 

@@ -9,8 +9,14 @@ import java.net.Socket;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.Queue;
+import weerSimulator.ErrorCorrection;
 
 public class ServerTest {
+	
+	static Queue<String> windQueue = new LinkedList<String>();
+	static Queue<String> cloudQueue = new LinkedList<String>();
     public static void main(String[] args) {
 
     	System.out.println("Running");
@@ -46,11 +52,7 @@ public class ServerTest {
     	private ArrayList<String> stationListNic;
     	private ArrayList<String> stationListBol;
     	private ArrayList<String> stationListSur;
-    	/*private LinkedList<?> windSpeedCheck;
-    	private LinkedList<?> cloudCoverageCheck;
-    	private String windSpeed;
-    	private String cloudCoverage;*/
-
+    
         public ClientHandler(Socket socket) {
         	
             this.clientSocket = socket;
@@ -59,10 +61,6 @@ public class ServerTest {
             stationListNic = new ArrayList<String>();
             stationListBol = new ArrayList<String>();
             stationListSur = new ArrayList<String>();
-//            Queue<String> windSpeedCheck = new LinkedList<String>();
-//            Queue<String> cloudCoverageCheck = new LinkedList<String>();
-//            windSpeedCheck.add("1");
-//            cloudCoverageCheck.add("1");
             
         }
         
@@ -76,42 +74,6 @@ public class ServerTest {
             return s;
             
         }
-        
-      /*  public String addWind(String windSpeed) {
-        	if(windSpeed != null) {
-        		windSpeedCheck.add(windSpeed);
-        		windSpeed = ErrorCorrection.errorCheck(windSpeedCheck, windSpeed);
-        		return windSpeed;
-        	}
-        	
-        	float[] windspeedF = ErrorCorrection.naarArray(windSpeedCheck);
-        	float som = ErrorCorrection.calcSom(windspeedF);
-        	float gemiddelde = ErrorCorrection.gemiddelde(som, windSpeedCheck);
-        	windSpeed = Float.toString(gemiddelde);
-        	if (windSpeedCheck.size() >=30) {
-        			windSpeedCheck.remove();
-				}
-        	return windSpeed;   	
-        }
-        
-        
-        public String addCoverage(String cloudCoverage) {
-        	if (cloudCoverage != null) {
-        		cloudCoverageCheck.add(cloudCoverage);
-        		cloudCoverage = ErrorCorrection.errorCheck(cloudCoverageCheck, cloudCoverage);
-        		return cloudCoverage;
-        	}
-        	
-        	float[] cloudF = ErrorCorrection.naarArray(cloudCoverageCheck);
-        	float som = ErrorCorrection.calcSom(cloudF);
-        	float gemiddelde = ErrorCorrection.gemiddelde(som, cloudCoverageCheck);
-        	cloudCoverage = Float.toString(gemiddelde);
-        	if (cloudCoverageCheck.size() >=30) {
-        			cloudCoverageCheck.remove();
-			}
-        	return cloudCoverage;
-       }*/
-        
 
         @Override
         public synchronized void run() {
@@ -122,7 +84,6 @@ public class ServerTest {
             String time = " ";
             String windSpeed = " ";
             String cloudCoverage = " ";
-            //String day = " ";
             stationListNic.add("298690");
             stationListBol.add("947260");
             stationListSur.add("749538");
@@ -150,9 +111,16 @@ public class ServerTest {
                     }
                     if(stationListNic.contains(station)) {
                     	
-                    	// doet errorhandeling
-                        //windSpeed = addWind(windSpeed);
-                       // cloudCoverage = addCoverage(cloudCoverage);
+                    	// zorgt dat de parseFloat methode werkt
+                    	windSpeed = windSpeed.replace(",", ".");
+                    	cloudCoverage = cloudCoverage.replace(",", ".");
+                    	
+                    	windQueue.add(windSpeed);
+                    	cloudQueue.add(cloudCoverage);
+                    	
+                    	//Error check
+                    	windSpeed = ErrorCorrection.errorCheck(windQueue, windSpeed);
+                    	cloudCoverage = ErrorCorrection.errorCheck(cloudQueue, cloudCoverage);
                     	
                     	System.out.println(station);
                         System.out.println(date);
@@ -178,9 +146,16 @@ public class ServerTest {
                     }
                     if(stationListBol.contains(station)) {
                     	
-                    	// doet errorhandeling
-                      //  windSpeed = addWind(windSpeed);
-                       // cloudCoverage = addCoverage(cloudCoverage);
+                    	// zorgt dat de parseFloat methode werkt
+                    	windSpeed = windSpeed.replace(",", ".");
+                    	cloudCoverage = cloudCoverage.replace(",", ".");
+                    	
+                    	windQueue.add(windSpeed);
+                    	cloudQueue.add(cloudCoverage);
+                    	
+                    	//Error check
+                    	windSpeed = ErrorCorrection.errorCheck(windQueue, windSpeed);
+                    	cloudCoverage = ErrorCorrection.errorCheck(cloudQueue, cloudCoverage);
                     	
                         System.out.println(station);
                         System.out.println(date);
@@ -206,21 +181,16 @@ public class ServerTest {
                     }
                     if(stationListSur.contains(station)) {
                     	
-//                    	// doet errorhandeling
-//                    	if(windSpeed != null && !windSpeed.isEmpty()){
-//                    		windSpeedCheck.add(windSpeed);
-//                    		windSpeed = ErrorCorrection.errorCheck(windSpeedCheck, windSpeed);	
-//                    	}
-//                    	float[] windspeedF = ErrorCorrection.naarArray(windSpeedCheck);
-//                    	float som = ErrorCorrection.calcSom(windspeedF);
-//                    	float gemiddelde = ErrorCorrection.gemiddelde(som, windSpeedCheck);
-//                    	windSpeed = Float.toString(gemiddelde);
-//                    	if (windSpeedCheck.size() >=30) {
-//                    			windSpeedCheck.remove();
-//            				}
-//                     	
-                        
-                        //cloudCoverage = addCoverage(cloudCoverage);
+                    	// zorgt dat de parseFloat methode werkt
+                    	windSpeed = windSpeed.replace(",", ".");
+                    	cloudCoverage = cloudCoverage.replace(",", ".");
+                    	
+                    	windQueue.add(windSpeed);
+                    	cloudQueue.add(cloudCoverage);
+                    	
+                    	//Error check
+                    	windSpeed = ErrorCorrection.errorCheck(windQueue, windSpeed);
+                    	cloudCoverage = ErrorCorrection.errorCheck(cloudQueue, cloudCoverage);
                     	
                         System.out.println(station);
                         System.out.println(date);
