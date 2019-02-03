@@ -98,7 +98,7 @@ public class ServerTest {
             stationListSur.add("749538");
       
             try {
-                out = new PrintWriter("file1.csv");
+                out = new PrintWriter("file.xml");
                 in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                 
                 String line;
@@ -125,21 +125,21 @@ public class ServerTest {
                         System.out.println(time);
                         System.out.println(windSpeed);
                         System.out.println(cloudCoverage);
-                        out.write("<NSTN>");
+                        out.write("NN");
                         out.write(station);
-                        out.write("</NSTN>");
-                        out.write("<DATE>");
+                        out.write(">");
+                        out.write("DN");
                         out.write(date);
-                        out.write("</DATE>");
-                        out.write("<TIME>");
+                        out.write(">");
+                        out.write("TN");
                         out.write(time);
-                        out.write("</TIME>");
-                        out.write("<WDSP>");
+                        out.write(">");
+                        out.write("WN");
                         out.write(windSpeed);
-                        out.write("</WDSP>");
-                        out.write("<CLDC>");
+                        out.write(">");
+                        out.write("CN");
                         out.write(cloudCoverage);
-                        out.write("</CLDC>");
+                        out.write(">");
 
                     }
                     if(stationListBol.contains(station)) {
@@ -149,22 +149,21 @@ public class ServerTest {
                         System.out.println(time);
                         System.out.println(windSpeed);
                         System.out.println(cloudCoverage);
-                        out.write("<BSTN>");
+                        out.write("BB");
                         out.write(station);
-                        out.write("</BSTN>");
-                        out.write("<DATE>");
+                        out.write(">");
+                        out.write("DB");
                         out.write(date);
-                        out.write("</DATE>");
-                        out.write("<TIME>");
+                        out.write(">");
+                        out.write("TB");
                         out.write(time);
-                        out.write("</TIME>");
-                        out.write("<WDSP>");
+                        out.write(">");
+                        out.write("WB");
                         out.write(windSpeed);
-                        out.write("</WDSP>");
-                        out.write("<CLDC>");
+                        out.write(">");
+                        out.write("CB");
                         out.write(cloudCoverage);
-                        out.write("</CLDC>");
-
+                        out.write(">");
                         
                     }
                     if(stationListSur.contains(station)) {
@@ -174,21 +173,21 @@ public class ServerTest {
                         System.out.println(time);
                         System.out.println(windSpeed);
                         System.out.println(cloudCoverage);
-                        out.write("<SSTN>");
+                        out.write("SS");
                         out.write(station);
-                        out.write("</SSTN>");
-                        out.write("<DATE>");
+                        out.write(">");
+                        out.write("DS");
                         out.write(date);
-                        out.write("</DATE>");
-                        out.write("<TIME>");
+                        out.write(">");
+                        out.write("TS");
                         out.write(time);
-                        out.write("</TIME>");
-                        out.write("<WDSP>");
+                        out.write(">");
+                        out.write("WS");
                         out.write(windSpeed);
-                        out.write("</WDSP>");
-                        out.write("<CLDC>");
+                        out.write(">");
+                        out.write("CS");
                         out.write(cloudCoverage);
-                        out.write("</CLDC>");
+                        out.write(">");
                      
                     }
 
