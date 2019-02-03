@@ -1,4 +1,4 @@
-package weerSimulator;
+package weather;
 
 
 import java.io.BufferedOutputStream;
