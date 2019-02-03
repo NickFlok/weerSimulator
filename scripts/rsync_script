@@ -1,0 +1,2 @@
+#!/bin/sh
+rsync -avz -e ssh /home/pi/data root@13.81.171.176:/home/ITV2E01/backup/
