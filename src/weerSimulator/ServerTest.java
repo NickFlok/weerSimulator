@@ -162,7 +162,7 @@ public class ServerTest {
                         System.out.println(time);
                         System.out.println(windSpeed);
                         System.out.println(cloudCoverage);
-                        out.write("N");
+                        out.write("BB");
                         out.write(station);
                         out.write(">");
                         out.write("DB");
